@@ -956,12 +956,17 @@ function enviarWhatsApp() {
   const r = calcular();
   const fecha = new Date();
   const mensaje = armarMensaje(r, numeroCotizacion(fecha), fecha);
-  const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
-  const descargaImagen = descargarImagenMontaje();
+  const url = `https://api.whatsapp.com/send?phone=${numero}&text=${encodeURIComponent(mensaje)}`;
 
-  const ventana = window.open(url, '_blank', 'noopener');
-  if (!ventana) window.location.href = url;
-  descargaImagen.then(() => {
+  const enlace = document.createElement('a');
+  enlace.href = url;
+  enlace.target = '_blank';
+  enlace.rel = 'noopener noreferrer';
+  document.body.appendChild(enlace);
+  enlace.click();
+  document.body.removeChild(enlace);
+
+  descargarImagenMontaje().then(() => {
     mostrarAviso('¡Imagen con frente y espalda descargada! Adjúntala en el chat de WhatsApp que se abrió.', 'ok');
   }).catch((err) => {
     console.error('No se pudo generar la vista previa de frente y espalda:', err);
