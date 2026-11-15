@@ -1,0 +1,79 @@
+{
+  "empresa": {
+    "nombre": "Taller Textil En Linea",
+    "eslogan": "Ropa de trabajo y seguridad industrial",
+    "telefonoWhatsApp": "50662157973",
+    "telefonoVisible": "+506 6215-7973",
+    "correo": "denianenoccb@gmail.com",
+    "moneda": "CRC",
+    "ivaPorcentaje": 13,
+    "validezDias": 15
+  },
+
+  "escalasDescuento": [
+    { "min": 1,   "max": 11,   "pct": 0, "etiqueta": "1-11 unidades",   "pctPorPaquete": { "camisa_cinta": 0, "cinta_logo": 0 } },
+    { "min": 12,  "max": 23,   "pct": 2, "etiqueta": "12-23 unidades",  "pctPorPaquete": { "camisa_cinta": 0.5, "cinta_logo": 1 } },
+    { "min": 24,  "max": 49,   "pct": 4, "etiqueta": "24-49 unidades",  "pctPorPaquete": { "camisa_cinta": 1, "cinta_logo": 2 } },
+    { "min": 50,  "max": 99,   "pct": 6, "etiqueta": "50-99 unidades",  "pctPorPaquete": { "camisa_cinta": 2, "cinta_logo": 3 } },
+    { "min": 100, "max": null, "pct": 8, "etiqueta": "100+ unidades",   "pctPorPaquete": { "camisa_cinta": 3, "cinta_logo": 4 }, "nota": "Descuento corporativo. Para volúmenes mayores puede aplicar una cotización especial." }
+  ],
+
+  "tallas": ["S", "M", "L", "XL", "XXL", "3XL"],
+
+  "mangas": [
+    { "id": "larga", "nombre": "Manga larga", "extra": 0 },
+    { "id": "corta", "nombre": "Manga corta", "extra": 0 }
+  ],
+
+  "colores": [
+    { "id": "azul_rey",    "nombre": "Azul rey",    "hex": "#1d4ed8" },
+    { "id": "azul_oscuro", "nombre": "Azul oscuro", "hex": "#1e3a5f" },
+    { "id": "negro",       "nombre": "Negro",       "hex": "#111827" },
+    { "id": "gris_claro",  "nombre": "Gris claro",  "hex": "#c4c9d1" },
+    { "id": "gris_oscuro", "nombre": "Gris oscuro", "hex": "#4b5563" },
+    { "id": "verde_fluor", "nombre": "Verde fluor", "hex": "#39e81a" },
+    { "id": "anaranjado",  "nombre": "Anaranjado",  "hex": "#ff6a13" },
+    { "id": "rojo",        "nombre": "Rojo",        "hex": "#d71f1f" },
+    { "id": "amarillo",    "nombre": "Amarillo",    "hex": "#f9d71c" }
+  ],
+
+  "ubicacionesLogo": [
+    { "id": "pecho_izq",   "nombre": "Pecho izquierdo",           "vista": "front", "x": 171, "y": 76,  "w": 44,  "h": 34 },
+    { "id": "pecho_der",   "nombre": "Pecho derecho",             "vista": "front", "x": 85,  "y": 76,  "w": 44,  "h": 34 },
+    { "id": "centro",      "nombre": "Centro del pecho",          "vista": "front", "x": 128, "y": 76,  "w": 44,  "h": 34 },
+    { "id": "manga_izq",   "nombre": "Manga izquierda",           "vista": "front", "x": 40,  "y": 76,  "w": 16,  "h": 18 },
+    { "id": "manga_der",   "nombre": "Manga derecha",             "vista": "front", "x": 244, "y": 76,  "w": 16,  "h": 18 },
+    { "id": "espalda",     "nombre": "Espalda",                   "vista": "back",  "x": 115, "y": 60,  "w": 70,  "h": 50 }
+  ],
+
+  "lineas": [
+    {
+      "id": "deportiva",
+      "nombre": "Camisa deportiva",
+      "descripcion": "Cuello redondo, tela deportiva. Manga larga o corta.",
+      "modelo": "deportiva",
+      "paquetes": [
+        { "id": "camisa_cinta", "nombre": "Camisa + cinta",                 "descripcion": "Incluye cinta reflectiva.",                      "precio": 4800, "incluye": { "cinta": true,  "logo": false } },
+        { "id": "cinta_logo",   "nombre": "Camisa + cinta + logo",          "descripcion": "Incluye cinta reflectiva y logo.",               "precio": 5000, "incluye": { "cinta": true,  "logo": true  } }
+      ],
+
+      "telas": [
+        { "id": "jik",           "nombre": "Jik",           "descripcion": "Patrón adiamantado, deportiva.", "extra": 0, "patron": "diamante" },
+        { "id": "punto_liso",    "nombre": "Punto liso",    "descripcion": "Tela de punto lisa.",            "extra": 0, "patron": "liso" },
+        { "id": "irazu",         "nombre": "Irazú",         "descripcion": "Deportiva stretch.",             "extra": 0, "patron": "stretch" }
+      ],
+
+      "cintas": [
+        { "id": "horizontal", "nombre": "Cinta 2\" Horizontal",            "descripcion": "Una banda horizontal centrada que atraviesa el pecho y las mangas.", "extra": 0 },
+        { "id": "cinta_35",   "nombre": "Cinta 3.5\" Vertical",            "descripcion": "Dos tiras verticales paralelas al frente y espalda.", "extra": 0 },
+        { "id": "hombro_abajo", "nombre": "Cintas verticales de hombro a ruedo", "descripcion": "Dos cintas desde los hombros hasta el ruedo, al frente y espalda.", "extra": 400 },
+        { "id": "bicolor",    "nombre": "Cinta con tirantes",               "descripcion": "Bandas reflectivas con tirantes.",           "extra": 400 }
+      ],
+
+      "marcajes": [
+        { "id": "dtf",        "nombre": "DTF Full Color",       "descripcion": "Transfer a todo color, ideal para logos complejos.", "costo": 0, "estilo": "dtf" },
+        { "id": "serigrafia", "nombre": "Serigrafía (1 tinta)", "descripcion": "Económica para grandes volúmenes.",                  "costo": 0, "estilo": "serigrafia" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,144 @@
+{
+  "_instrucciones": "Edita nombre y descripcion para cambiar los textos de las opciones. En coloresCinta e interfaz.gorro, edita directamente el texto. No cambies los identificadores (claves como deportiva o cinta_35). Deja descripcion vacia para ocultarla.",
+  "lineas": {
+    "deportiva": {
+      "nombre": "Camisa deportiva",
+      "descripcion": "Cuello redondo, tela deportiva. Manga larga o corta.",
+      "paquetes": {
+        "camisa_cinta": {
+          "nombre": "Camisa + cinta",
+          "descripcion": "Incluye cinta reflectiva."
+        },
+        "cinta_logo": {
+          "nombre": "Camisa + cinta + logo",
+          "descripcion": "Incluye cinta reflectiva y logo."
+        }
+      },
+      "telas": {
+        "jik": {
+          "nombre": "Jik",
+          "descripcion": "Patrón adiamantado, deportiva."
+        },
+        "punto_liso": {
+          "nombre": "Punto liso",
+          "descripcion": "Tela de punto lisa."
+        },
+        "irazu": {
+          "nombre": "Irazú",
+          "descripcion": "Deportiva stretch."
+        }
+      },
+      "cintas": {
+        "horizontal": {
+          "nombre": "Cinta Horizontal",
+          "descripcion": "Una banda horizontal centrada que atraviesa el pecho y las mangas."
+        },
+        "cinta_35": {
+          "nombre": "Cinta 3.5\" Vertical",
+          "descripcion": "Dos tiras verticales paralelas al frente y espalda."
+        },
+        "hombro_abajo": {
+          "nombre": "Cintas verticales de hombro a ruedo",
+          "descripcion": "Dos cintas desde los hombros hasta el ruedo, al frente y espalda."
+        },
+        "bicolor": {
+          "nombre": "Cinta con tirantes",
+          "descripcion": "Bandas reflectivas con tirantes."
+        }
+      },
+      "marcajes": {
+        "dtf": {
+          "nombre": "DTF Full Color",
+          "descripcion": "Transfer a todo color, ideal para logos complejos."
+        },
+        "serigrafia": {
+          "nombre": "Serigrafía (1 tinta)",
+          "descripcion": "Económica para grandes volúmenes."
+        }
+      }
+    }
+  },
+  "mangas": {
+    "larga": {
+      "nombre": "Manga larga",
+      "descripcion": ""
+    },
+    "corta": {
+      "nombre": "Manga corta",
+      "descripcion": ""
+    }
+  },
+  "colores": {
+    "azul_rey": {
+      "nombre": "Azul rey"
+    },
+    "azul_oscuro": {
+      "nombre": "Azul oscuro"
+    },
+    "negro": {
+      "nombre": "Negro"
+    },
+    "gris_claro": {
+      "nombre": "Gris claro"
+    },
+    "gris_oscuro": {
+      "nombre": "Gris oscuro"
+    },
+    "verde_fluor": {
+      "nombre": "Verde fluor"
+    },
+    "anaranjado": {
+      "nombre": "Anaranjado"
+    },
+    "rojo": {
+      "nombre": "Rojo"
+    },
+    "amarillo": {
+      "nombre": "Amarillo"
+    }
+  },
+  "coloresCinta": {
+    "gris": "Gris",
+    "bicolor_verde": "Bicolor verde y gris",
+    "bicolor_naranja": "Bicolor naranja y gris"
+  },
+  "ubicacionesLogo": {
+    "pecho_izq": {
+      "nombre": "Pecho izquierdo",
+      "descripcion": "Ubicación del logo en el lado izquierdo del pecho."
+    },
+    "pecho_der": {
+      "nombre": "Pecho derecho",
+      "descripcion": "Ubicación del logo en el lado derecho del pecho."
+    },
+    "centro": {
+      "nombre": "Centro del pecho",
+      "descripcion": "Ubicación del logo en el centro del pecho."
+    },
+    "manga_izq": {
+      "nombre": "Manga izquierda",
+      "descripcion": "Ubicación del logo en la manga izquierda."
+    },
+    "manga_der": {
+      "nombre": "Manga derecha",
+      "descripcion": "Ubicación del logo en la manga derecha."
+    },
+    "espalda": {
+      "nombre": "Espalda",
+      "descripcion": "Activa el switch para incluir un logo en la espalda."
+    }
+  },
+  "ubicacionesLogoAdicionales": {
+    "ninguna": {
+      "nombre": "Ninguna",
+      "descripcion": "No agregar otra ubicación en pecho."
+    },
+    "pecho_der": {
+      "nombre": "Pecho derecho adicional",
+      "descripcion": "Agrega un logo en el lado derecho del pecho."
+    }
+  },
+  "interfaz": {
+    "gorro": "Incluir gorro en la prenda"
+  }
+}
