@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es-CR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Taller Textil En Linea | Uniformes y Ropa de Trabajo</title>
+  <meta name="description" content="Personaliza camisas, cinta reflectiva y logo Cotización al instante con descuentos por volumen">
+  <meta name="theme-color" content="#1e293b">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%231e293b'/%3E%3Cpath d='M30 22l14-6q6 12 12 0l14 6 16 22-12 6-6-14v46H32V36l-6 14-12-6z' fill='%23f59e0b'/%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            pizarra:   { 700: '#334155', 800: '#1e293b', 900: '#0f172a' },
+            seguridad: { DEFAULT: '#f59e0b', 400: '#fbbf24', 500: '#f59e0b', 600: '#d97706' },
+            marino:    '#0f2a47'
+          }
+        }
+      }
+    };
+  </script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="pb-24 lg:pb-0">
+  <header class="bg-pizarra-800 text-white">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between gap-4">
+      <div class="flex items-center gap-3 min-w-0">
+        <span class="flex-none w-11 h-11 rounded-lg bg-seguridad flex items-center justify-center" aria-hidden="true">
+          <svg viewBox="0 0 100 100" class="w-7 h-7"><path d="M30 22l14-6q6 12 12 0l14 6 16 22-12 6-6-14v46H32V36l-6 14-12-6z" fill="#1e293b"/></svg>
+        </span>
+        <div class="min-w-0">
+          <p id="empresaNombre" class="titulo-industrial text-2xl font-bold leading-none truncate">Uniformes Pro CR</p>
+          <p id="empresaEslogan" class="text-xs text-slate-300 truncate">Ropa de trabajo y seguridad industrial</p>
+        </div>
+      </div>
+      <p class="hidden sm:block text-sm text-slate-300">Atención a empresas: <strong id="empresaTelefono" class="text-seguridad">—</strong></p>
+    </div>
+    <div class="franja-seguridad" aria-hidden="true"></div>
+  </header>
+
+  <div id="errorCatalogo" hidden class="max-w-3xl mx-auto m-6 p-5 card border-l-8 border-red-600">
+    <h2 class="titulo-industrial text-xl font-bold text-red-700">No se pudo cargar la configuración</h2>
+    <p class="text-sm mt-2">Los archivos <code>productos.json</code> y <code>textos.json</code> deben estar junto a <code>index.html</code>.</p>
+  </div>
+
+  <main id="app" class="max-w-7xl mx-auto px-4 py-6">
+    <div class="mb-5">
+      <h1 class="titulo-industrial text-3xl sm:text-4xl font-bold text-pizarra-800">Configura tu camisa <span class="text-seguridad-600">y cotiza al instante</span></h1>
+      <p class="text-slate-600 mt-1 max-w-3xl">Personaliza manga, tela, color, cinta reflectiva, gorro integrado y logos.</p>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-6 items-start">
+      <section aria-labelledby="tituloVisor" class="lg:sticky lg:top-4">
+        <div class="card p-4">
+          <div class="flex items-center justify-between gap-3 mb-3">
+            <h2 id="tituloVisor" class="titulo-industrial text-xl font-bold">Visor interactivo</h2>
+            <div id="toggleVista" class="segmento" role="group" aria-label="Vista de la prenda">
+              <button type="button" data-accion="vista" data-id="front" aria-pressed="true">Frente</button>
+              <button type="button" data-accion="vista" data-id="back" aria-pressed="false">Espalda</button>
+            </div>
+          </div>
+
+          <div class="controles-zoom" role="group" aria-label="Zoom del montaje">
+            <button type="button" id="zoomMenos" data-accion="zoom-menos" aria-label="Alejar">−</button>
+            <output id="zoomNivel" aria-live="polite">100%</output>
+            <button type="button" id="zoomMas" data-accion="zoom-mas" aria-label="Acercar">+</button>
+            <button type="button" id="zoomRestablecer" data-accion="zoom-restablecer">Restablecer</button>
+          </div>
+          <div class="visor-fondo p-3 sm:p-6">
+            <div id="visorSvg" aria-live="polite"></div>
+          </div>
+
+          <p id="visorAviso" hidden class="mt-3 text-sm font-semibold text-pizarra-900 bg-seguridad-400/30 border border-seguridad rounded-lg px-3 py-2"></p>
+          <div id="visorChips" class="mt-3 flex flex-wrap gap-2 bg-pizarra-800 rounded-lg p-3"></div>
+        </div>
+      </section>
+
+      <div id="configuracion" class="space-y-5">
+        <section class="card p-4 paso" aria-labelledby="t1">
+          <h2 id="t1" class="flex items-center gap-2 titulo-industrial text-lg font-bold mb-3"><span class="paso-num" aria-hidden="true"></span> Modelo de camisa</h2>
+          <div id="listaLineas" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
+        </section>
+
+        <section class="card p-4 paso" aria-labelledby="t2">
+          <h2 id="t2" class="flex items-center gap-2 titulo-industrial text-lg font-bold mb-3"><span class="paso-num" aria-hidden="true"></span> Manga</h2>
+          <div id="listaMangas" class="grid grid-cols-2 gap-3"></div>
+        </section>
+
+        <section class="card p-4 paso" aria-labelledby="tGorro">
+          <h2 id="tGorro" class="flex items-center gap-2 titulo-industrial text-lg font-bold mb-3"><span class="paso-num" aria-hidden="true"></span> Capucha / Gorro integrado</h2>
+          <label class="flex items-center justify-between gap-2 p-3 bg-slate-50 border border-slate-200 rounded-lg cursor-pointer hover:bg-slate-100">
+            <span class="text-sm font-semibold text-slate-800"><span id="textoGorro">Incluir gorro / capucha en la prenda</span> <span class="text-slate-500">(+₡300)</span></span>
+            <span class="relative inline-flex h-6 w-11 flex-none">
+              <input type="checkbox" id="checkGorro" class="peer sr-only" role="switch" aria-label="Incluir gorro o capucha integrada">
+              <span class="absolute inset-0 rounded-full bg-slate-300 transition-colors peer-checked:bg-amber-500"></span>
+              <span class="absolute left-1 top-1 h-4 w-4 rounded-full bg-white shadow transition-transform peer-checked:translate-x-5"></span>
+            </span>
+          </label>
+        </section>
+
+        <section class="card p-4 paso" aria-labelledby="t3">
+          <h2 id="t3" class="flex items-center gap-2 titulo-industrial text-lg font-bold mb-3"><span class="paso-num" aria-hidden="true"></span> Tipo de tela</h2>
+          <div id="listaTelas" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
+        </section>
+
+        <section class="card p-4 paso" aria-labelledby="t4">
+          <h2 id="t4" class="flex items-center gap-2 titulo-industrial text-lg font-bold mb-3"><span class="paso-num" aria-hidden="true"></span> Color
+            <span class="ml-auto text-sm font-sans normal-case font-semibold text-slate-600" id="nombreColor"></span>
+          </h2>
+          <div id="listaColores" class="flex flex-wrap gap-3"></div>
+        </section>
+
+        <section id="bloquePaquete" hidden class="card p-4 paso" aria-labelledby="t5">
+          <h2 id="t5" class="flex items-center gap-2 titulo-industrial text-lg font-bold mb-3"><span class="paso-num" aria-hidden="true"></span> Paquete</h2>
+          <div id="listaPaquetes" class="grid grid-cols-1 gap-3"></div>
+        </section>
+
+        <section id="bloqueCinta" class="card p-4 paso" aria-labelledby="t6">
+          <h2 id="t6" class="flex items-center gap-2 titulo-industrial text-lg font-bold mb-1"><span class="paso-num" aria-hidden="true"></span> Cinta reflectiva</h2>
+          <p id="notaPaqueteCinta" hidden class="text-xs text-slate-500 mb-3">El estilo de cinta está incluido en el paquete.</p>
+          <div id="listaCintas" class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-3"></div>
+          <div id="bloqueColoresCinta" class="mt-4 pt-4 border-t border-slate-200">
+            <h3 class="flex items-center justify-between text-sm font-bold text-slate-700 mb-3">
+              <span>Color de la cinta</span>
+              <span id="nombreColorCinta" class="font-semibold text-slate-600"></span>
+            </h3>
+            <div id="listaColoresCinta" class="flex flex-wrap gap-3"></div>
+          </div>
+        </section>
+
+        <section id="bloqueMarcaje" class="card p-4 paso" aria-labelledby="t7">
+          <h2 id="t7" class="flex items-center gap-2 titulo-industrial text-lg font-bold mb-3"><span class="paso-num" aria-hidden="true"></span> Personalización con logo</h2>
+          <div id="listaMarcajes" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
+          <div id="bloqueUbicacion" hidden class="mt-4">
+            <p class="text-sm font-bold text-slate-700 mb-2">Ubicación de los logos principales</p>
+            <div id="listaUbicaciones" class="grid grid-cols-2 gap-3"></div>
+
+            <div id="cargaLogoPrincipal" class="mt-3"></div>
+            <label id="bloqueLogoEspaldaIgual" for="checkLogoEspaldaIgual" hidden class="flex items-center justify-between gap-3 mt-3 p-3 bg-slate-50 border border-slate-200 rounded-lg cursor-pointer">
+              <span class="text-sm font-semibold text-slate-700">Logo de espalda igual al de frente</span>
+              <span class="relative inline-flex h-6 w-11 flex-none">
+                <input type="checkbox" id="checkLogoEspaldaIgual" class="peer sr-only" role="switch" aria-label="Logo de espalda igual al de frente" checked>
+                <span class="absolute inset-0 rounded-full bg-slate-300 transition-colors peer-checked:bg-amber-500"></span>
+                <span class="absolute left-1 top-1 h-4 w-4 rounded-full bg-white shadow transition-transform peer-checked:translate-x-5"></span>
+              </span>
+            </label>
+            <div id="cargaLogoEspalda" hidden class="mt-2"></div>
+
+            <p class="text-sm font-bold text-slate-700 mt-4 mb-2">Segunda ubicación en pecho (opcional)</p>
+            <div id="listaUbicaciones2" class="grid grid-cols-2 gap-3"></div>
+            <div id="cargaLogoPechoDer" hidden class="mt-3"></div>
+
+            <p class="text-sm font-bold text-slate-700 mt-4 mb-2">Logos en mangas (opcional)</p>
+            <p class="text-xs text-slate-500 mb-2">Una manga: ₡200. Ambas mangas: ₡300.</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              <label class="flex items-center gap-2 p-3 bg-slate-50 border border-slate-200 rounded-lg cursor-pointer">
+                <input type="checkbox" id="checkLogoMangaIzq" class="w-4 h-4 accent-seguridad">
+                <span class="text-sm font-semibold text-slate-700">Manga izquierda (+₡200)</span>
+              </label>
+              <label class="flex items-center gap-2 p-3 bg-slate-50 border border-slate-200 rounded-lg cursor-pointer">
+                <input type="checkbox" id="checkLogoMangaDer" class="w-4 h-4 accent-seguridad">
+                <span class="text-sm font-semibold text-slate-700">Manga derecha (+₡200)</span>
+              </label>
+              <label class="flex items-center gap-2 p-3 bg-slate-50 border border-slate-200 rounded-lg cursor-pointer sm:col-span-2">
+                <input type="checkbox" id="checkAmbasMangas" class="w-4 h-4 accent-seguridad">
+                <span class="text-sm font-semibold text-slate-700">Ambas mangas (+₡300)</span>
+              </label>
+            </div>
+            <div id="cargaLogoMangaIzq" hidden class="mt-2"></div>
+            <div id="cargaLogoMangaDer" hidden class="mt-2"></div>
+          </div>
+        </section>
+
+        <section id="bloqueTallas" class="card p-4 paso border-2 border-transparent" aria-labelledby="t8">
+          <h2 id="t8" class="flex items-center gap-2 titulo-industrial text-lg font-bold mb-3"><span class="paso-num" aria-hidden="true"></span> Tallas y cantidades
+            <span class="ml-auto text-sm font-sans normal-case font-semibold text-slate-600">Total: <span id="totalTallas" class="text-pizarra-900 font-bold">0</span></span>
+          </h2>
+          <div id="listaTallas" class="grid grid-cols-2 sm:grid-cols-3 gap-3"></div>
+          <button type="button" data-accion="limpiar-tallas" class="mt-3 text-sm font-semibold text-slate-600 underline hover:text-pizarra-900">Limpiar cantidades</button>
+        </section>
+
+        <section class="card p-4 paso" aria-labelledby="t9">
+          <h2 id="t9" class="flex items-center gap-2 titulo-industrial text-lg font-bold mb-3"><span class="paso-num" aria-hidden="true"></span> Tus datos <span class="text-xs font-sans normal-case font-medium text-slate-500">(opcional)</span></h2>
+          <div class="grid sm:grid-cols-2 gap-3">
+            <label class="block text-sm font-semibold text-slate-700">Empresa o nombre
+              <input id="cliEmpresa" type="text" autocomplete="organization" class="campo mt-1" placeholder="Constructora ABC S.A.">
+            </label>
+            <label class="block text-sm font-semibold text-slate-700">Persona de contacto
+              <input id="cliContacto" type="text" autocomplete="name" class="campo mt-1" placeholder="Nombre y apellido">
+            </label>
+            <label class="block text-sm font-semibold text-slate-700 sm:col-span-2">Teléfono
+              <input id="cliTelefono" type="tel" autocomplete="tel" class="campo mt-1" placeholder="8888-8888">
+            </label>
+            <label class="block text-sm font-semibold text-slate-700 sm:col-span-2">Observaciones
+              <textarea id="cliNotas" rows="2" class="campo mt-1" placeholder="Fecha requerida, lugar de entrega…"></textarea>
+            </label>
+          </div>
+        </section>
+
+        <section id="desglose" class="card p-4 border-t-8 border-t-seguridad scroll-mt-4" aria-labelledby="tDesglose">
+          <h2 id="tDesglose" class="titulo-industrial text-xl font-bold mb-2">Desglose de precios en vivo</h2>
+          <div id="desgloseContenido"></div>
+          <p class="text-xs text-slate-500 mt-3">Los precios del catálogo no incluyen IVA; el <span id="ivaTexto">13</span>% se suma al subtotal.</p>
+
+          <div class="grid sm:grid-cols-2 gap-3 mt-4">
+            <button type="button" data-accion="whatsapp" class="btn btn-whatsapp">
+              <svg viewBox="0 0 24 24" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.3 7.4L3 21l2.1-5.6A8.4 8.4 0 1 1 21 11.5z"/></svg>
+              Enviar pedido por WhatsApp
+            </button>
+            <button type="button" data-accion="imprimir" class="btn btn-secundario">
+              <svg viewBox="0 0 24 24" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2M6 14h12v8H6z"/></svg>
+              Imprimir / Guardar en PDF
+            </button>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="bg-pizarra-900 text-slate-400 text-sm mt-10">
+    <div class="franja-seguridad" aria-hidden="true"></div>
+    <div class="max-w-7xl mx-auto px-4 py-6 flex flex-col sm:flex-row justify-between gap-2">
+      <p>© <span id="anioActual"></span> © 2026 Taller Textil En Línea · Desarrollado por Denian Cascante.</p>
+    </div>
+  </footer>
+
+  <div class="lg:hidden fixed bottom-0 inset-x-0 z-50 bg-pizarra-800 text-white border-t-4 border-seguridad px-4 py-2.5 flex items-center justify-between gap-3">
+    <div>
+      <p class="text-[11px] uppercase tracking-wide text-slate-300" id="barraCantidad">0 prenda(s)</p>
+      <p class="titulo-industrial text-2xl font-bold leading-none text-seguridad" id="barraTotal">₡0</p>
+    </div>
+    <a href="#desglose" class="btn bg-seguridad text-pizarra-900 !py-2.5 !px-4 text-sm">Ver desglose y enviar</a>
+  </div>
+
+  <div id="aviso" role="status" aria-live="polite"></div>
+  <div id="hojaCotizacion" aria-hidden="true"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
