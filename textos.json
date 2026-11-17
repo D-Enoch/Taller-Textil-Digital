@@ -34,7 +34,7 @@
           "descripcion": "Una banda horizontal centrada que atraviesa el pecho y las mangas."
         },
         "cinta_35": {
-          "nombre": "Cinta 3.5\" Vertical",
+          "nombre": "Cinta 35cm Vertical",
           "descripcion": "Dos tiras verticales paralelas al frente y espalda."
         },
         "hombro_abajo": {
@@ -53,7 +53,7 @@
         },
         "serigrafia": {
           "nombre": "Serigrafía (1 tinta)",
-          "descripcion": "Económica para grandes volúmenes."
+          "descripcion": "Resistente"
         }
       }
     }
